@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Express Lab</title>
+    <style>
+        body { font-family: sans-serif; padding: 20px; }
+        .box { background: #eef2f3; padding: 15px; border-radius: 8px; max-width: 300px; }
+    </style>
+</head>
+<body>
+
+    <h2>Moja aplikacja Node.js / Express.js</h2>
+    
+    <div class="box" id="student-data">
+        <p>Ładowanie danych...</p>
+    </div>
+
+    <script>
+        fetch('/api/hello')
+            .then(response => response.json())
+            .then(data => {
+                const div = document.getElementById('student-data');
+                div.innerHTML = `
+                    <p><strong>Imię:</strong> ${data.imie}</p>
+                    <p><strong>Nazwisko:</strong> ${data.nazwisko}</p>
+                    <p><strong>Numer indeksu:</strong> ${data.indeks}</p>
+                `;
+            })
+            .catch(error => {
+                console.error('Błąd:', error);
+                document.getElementById('student-data').innerHTML = '<p style="color:red;">Błąd ładowania danych.</p>';
+            });
+    </script>
+
+</body>
+</html>
